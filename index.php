@@ -57,3 +57,30 @@ $n = 20;
             }
         ?>
 </table>
+<hr>
+<table border="1px">
+    <tr>
+        <td>
+            y = x<sub>1</sub> +  x<sub>2</sub>
+        </td>
+        <?php
+            for($k = 2; $k <= $n*2; $k++)
+            {
+                echo "<td>".$k."</td>";
+            } 
+        ?>
+    </tr>
+    <tr>
+        <td>
+            p<sub>k</sub>
+        </td>
+        <?php
+            for($k = 2; $k <= $n*2; $k++)
+            {
+                $value = ($n - abs($n + 1 - $k)) / ($n*$n);
+                echo "<td>".$value."</td>";
+            } 
+        ?>
+    </tr>
+</table>
+<hr>
