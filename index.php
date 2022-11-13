@@ -84,3 +84,29 @@ $n = 20;
     </tr>
 </table>
 <hr>
+<table border="1px">
+    <tr>
+        <td>
+            x<sub>1</sub>/y
+        </td>
+        <?php
+            for($k = 2; $k <= $n*2; $k++)
+            {
+                echo "<td>".$k."</td>";
+            } 
+        ?>
+    </tr>
+    <?php
+        for($i = 1; $i <= $n; $i++)
+        {
+            echo "<tr> <td>".$i."</td>";
+            for($j = 2; $j <= $n*2; $j++)
+            {
+                $value = 0;
+                if($j-$i >= 1 && $j-$i <= $n) $value=1/($n*2);
+                echo "<td>".($value)."</td>";
+            }
+            echo "</tr>";
+        } 
+    ?>
+</table>
