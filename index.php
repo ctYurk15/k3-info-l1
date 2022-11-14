@@ -6,6 +6,7 @@
 
     
     $n = 20;
+    $table_14_tmp_data = [];
 
 ?>
 
@@ -134,20 +135,41 @@
         ?>
     </tr>
     <?php
-        for($i = 1; $i <= $n; $i++)
+        for($i = 1; $i <= $n+1; $i++)
         {
-            echo "<tr> <td>".$i."</td>";
+            //sum row
+            if($i == $n+1)echo "<tr><td>Sum</td>";
+            else echo "<tr> <td>".$i."</td>";
+
             for($j = 2; $j <= $n*2; $j++)
             {
                 $value = 0;
-                if($j-$i >= 1 && $j-$i <= $n) 
+                if($i == $n+1)
                 {
-                    $value = (1/($n*$n)) * log((1/($n*getPk($n, $j))), 2);
-                    $value = number_format($value, 4);
+                    $value = $table_14_tmp_data[$j];
+                }
+                else 
+                {
+                    if($j-$i >= 1 && $j-$i <= $n) 
+                    {
+                        $value = (1/($n*$n)) * log((1/($n*getPk($n, $j))), 2);
+                        $value = number_format($value, 4);
+                    }
+                    
+                    //calculate total by y-axis
+                    if(!isset($table_14_tmp_data[$j])) $table_14_tmp_data[$j] = 0;
+                    $table_14_tmp_data[$j] += $value;
+                    $table_14_tmp_data[$j] = number_format($table_14_tmp_data[$j], 4);
+                    
                 }
                 echo "<td>".($value)."</td>";
+               
             }
-            echo "</tr>";
+            $last_column = '';
+            if($i == $n+1) $last_column =  number_format(array_sum(array_values($table_14_tmp_data)), 4);
+            echo "<td>".$last_column."</td></tr>";
+
+            
         } 
     ?>
 </table>
