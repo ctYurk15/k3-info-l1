@@ -1,3 +1,14 @@
+<?php
+    function getPk($n, $k)
+    {
+        return ($n - abs($n + 1 - $k)) / ($n*$n);
+    }
+
+    
+    $n = 20;
+
+?>
+
 <style>
     body
     {
@@ -5,12 +16,6 @@
         color: white;
     }
 </style>
-
-<?php
-
-$n = 20;
-
-?>
 
 <table border="1px">
     <tr>
@@ -77,7 +82,8 @@ $n = 20;
         <?php
             for($k = 2; $k <= $n*2; $k++)
             {
-                $value = ($n - abs($n + 1 - $k)) / ($n*$n);
+                $value = getPk($n, $k);
+                $value = number_format($value, 4);
                 echo "<td>".$value."</td>";
             } 
         ?>
@@ -103,7 +109,42 @@ $n = 20;
             for($j = 2; $j <= $n*2; $j++)
             {
                 $value = 0;
-                if($j-$i >= 1 && $j-$i <= $n) $value=1/($n*2);
+                if($j-$i >= 1 && $j-$i <= $n) 
+                {
+                    $value = 1/($n*$n);
+                    $value = number_format($value, 4);
+                }
+                echo "<td>".($value)."</td>";
+            }
+            echo "</tr>";
+        } 
+    ?>
+</table>
+<hr>
+<table border="1px">
+    <tr>
+        <td>
+            x<sub>1</sub>/y
+        </td>
+        <?php
+            for($k = 2; $k <= $n*2; $k++)
+            {
+                echo "<td>".$k."</td>";
+            } 
+        ?>
+    </tr>
+    <?php
+        for($i = 1; $i <= $n; $i++)
+        {
+            echo "<tr> <td>".$i."</td>";
+            for($j = 2; $j <= $n*2; $j++)
+            {
+                $value = 0;
+                if($j-$i >= 1 && $j-$i <= $n) 
+                {
+                    $value = (1/($n*$n)) * log((1/($n*getPk($n, $j))), 2);
+                    $value = number_format($value, 4);
+                }
                 echo "<td>".($value)."</td>";
             }
             echo "</tr>";
